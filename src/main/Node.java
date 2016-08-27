@@ -28,4 +28,11 @@ public class Node {
     public void setNext(Node Next) {
         this.Next = Next;
     }
+    
+    public boolean hasNext(){
+        if(Next != null){
+            return true;
+        }    
+        return false;
+    }
 }

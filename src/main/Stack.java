@@ -15,7 +15,7 @@ public class Stack {
     }
 
     public void push(Object data) {
-        if (empty()) {
+        if (isEmpty()) {
             top = new Node(data);
         } else {
             Node tmp = new Node(data);
@@ -36,7 +36,10 @@ public class Stack {
         return top.getData();
     }
 
-    public boolean empty() {
-        return size == 0;
+    public boolean isEmpty() {
+        if (size == 0) {
+            return true;
+        }else 
+            return false;
     }
 }
