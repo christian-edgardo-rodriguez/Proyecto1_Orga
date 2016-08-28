@@ -1,10 +1,12 @@
 package main;
 
+import java.io.Serializable;
+
 /**
  *
  * @author vinicio
  */
-public class DLinkedList {
+public class DLinkedList implements Serializable {
 
     private DLLNode head = null;
     private DLLNode last = null;

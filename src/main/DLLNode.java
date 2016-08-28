@@ -1,10 +1,12 @@
 package main;
 
+import java.io.Serializable;
+
 /**
  *
  * @author vinicio
  */
-public class DLLNode {
+public class DLLNode implements Serializable {
 
     private Object Data = null;
     private DLLNode prev = null;

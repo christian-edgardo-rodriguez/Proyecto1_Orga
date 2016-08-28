@@ -1,15 +1,17 @@
 package main;
 
+import java.io.Serializable;
+
 /**
  *
  * @author vinicio
  */
-public class Node {
+public class Node1 implements Serializable {
 
     private Object Data = null;
-    private Node Next = null;
+    private Node1 Next = null;
 
-    public Node(Object Data) {
+    public Node1(Object Data) {
         this.Data = Data;
     }
 
@@ -21,11 +23,11 @@ public class Node {
         this.Data = Data;
     }
 
-    public Node getNext() {
+    public Node1 getNext() {
         return Next;
     }
 
-    public void setNext(Node Next) {
+    public void setNext(Node1 Next) {
         this.Next = Next;
     }
 }

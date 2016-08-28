@@ -44,6 +44,25 @@ public class Main extends javax.swing.JFrame {
         tableAddFieldRemove = new javax.swing.JButton();
         tableAddSave = new javax.swing.JButton();
         tableUpdateDialog = new javax.swing.JDialog();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        tableUpdateFieldAdd = new javax.swing.JButton();
+        tableUpdateFieldRemove = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        tableUpdateName = new javax.swing.JTextField();
+        tableUpdateType = new javax.swing.JComboBox<>();
+        jLabel17 = new javax.swing.JLabel();
+        tableUpdateLength = new javax.swing.JSpinner();
+        tableUpdateFields = new javax.swing.JComboBox<>();
+        tableUpdateField = new javax.swing.JTextField();
+        tableUpdateOrg = new javax.swing.JComboBox<>();
+        jLabel18 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableUpdateRegistryTable = new javax.swing.JTable();
+        tableUpdateSelectedTable = new javax.swing.JComboBox<>();
+        jLabel19 = new javax.swing.JLabel();
+        tableUpdateGuardar = new javax.swing.JButton();
         tableDeleteDialog = new javax.swing.JDialog();
         talbeDeleteNode = new javax.swing.JComboBox<>();
         tableDeleteDelete = new javax.swing.JButton();
@@ -75,6 +94,7 @@ public class Main extends javax.swing.JFrame {
         relationAddMenuItem = new javax.swing.JMenuItem();
         relationUpdateMenuItem = new javax.swing.JMenuItem();
         relationDeleteMenuItem = new javax.swing.JMenuItem();
+        viewDiagramDialog = new javax.swing.JDialog();
         tableManager = new javax.swing.JButton();
         relationManager = new javax.swing.JButton();
         diagramViewer = new javax.swing.JButton();
@@ -169,15 +189,134 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel13.setText("TIpo de Organizacion");
+
+        jLabel14.setText("Campos");
+
+        tableUpdateFieldAdd.setText("Agregar");
+
+        tableUpdateFieldRemove.setText("Eliminar");
+
+        jLabel15.setText("Longitud");
+
+        jLabel16.setText("Nombre");
+
+        tableUpdateType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fijo", "Variable" }));
+
+        jLabel17.setText("Longitud de Campos");
+
+        tableUpdateLength.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+
+        tableUpdateOrg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FIjar la Longitud del Campo", "Iniciar el Campo con un Indicador" }));
+
+        jLabel18.setText("Agregar Campo");
+
+        tableUpdateRegistryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tableUpdateRegistryTable);
+        if (tableUpdateRegistryTable.getColumnModel().getColumnCount() > 0) {
+            tableUpdateRegistryTable.getColumnModel().getColumn(0).setResizable(false);
+            tableUpdateRegistryTable.getColumnModel().getColumn(1).setResizable(false);
+            tableUpdateRegistryTable.getColumnModel().getColumn(2).setResizable(false);
+            tableUpdateRegistryTable.getColumnModel().getColumn(3).setResizable(false);
+            tableUpdateRegistryTable.getColumnModel().getColumn(4).setResizable(false);
+            tableUpdateRegistryTable.getColumnModel().getColumn(5).setResizable(false);
+            tableUpdateRegistryTable.getColumnModel().getColumn(6).setResizable(false);
+            tableUpdateRegistryTable.getColumnModel().getColumn(7).setResizable(false);
+            tableUpdateRegistryTable.getColumnModel().getColumn(8).setResizable(false);
+            tableUpdateRegistryTable.getColumnModel().getColumn(9).setResizable(false);
+            tableUpdateRegistryTable.getColumnModel().getColumn(10).setResizable(false);
+            tableUpdateRegistryTable.getColumnModel().getColumn(11).setResizable(false);
+            tableUpdateRegistryTable.getColumnModel().getColumn(12).setResizable(false);
+        }
+
+        jLabel19.setText("Table");
+
+        tableUpdateGuardar.setText("Guardar");
+
         javax.swing.GroupLayout tableUpdateDialogLayout = new javax.swing.GroupLayout(tableUpdateDialog.getContentPane());
         tableUpdateDialog.getContentPane().setLayout(tableUpdateDialogLayout);
         tableUpdateDialogLayout.setHorizontalGroup(
             tableUpdateDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(tableUpdateDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tableUpdateDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(tableUpdateDialogLayout.createSequentialGroup()
+                        .addGroup(tableUpdateDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel19))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(tableUpdateDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(tableUpdateDialogLayout.createSequentialGroup()
+                                .addGroup(tableUpdateDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tableUpdateFields, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tableUpdateLength)
+                                    .addComponent(tableUpdateOrg, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tableUpdateType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tableUpdateName)
+                                    .addComponent(tableUpdateField, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(tableUpdateDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tableUpdateFieldAdd)
+                                    .addComponent(tableUpdateFieldRemove))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(tableUpdateSelectedTable, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+            .addGroup(tableUpdateDialogLayout.createSequentialGroup()
+                .addGap(312, 312, 312)
+                .addComponent(tableUpdateGuardar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tableUpdateDialogLayout.setVerticalGroup(
             tableUpdateDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tableUpdateDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tableUpdateDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tableUpdateSelectedTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19))
+                .addGap(18, 18, 18)
+                .addGroup(tableUpdateDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(tableUpdateName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(tableUpdateDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tableUpdateType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addGap(18, 18, 18)
+                .addGroup(tableUpdateDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tableUpdateOrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addGap(18, 18, 18)
+                .addGroup(tableUpdateDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tableUpdateLength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addGap(18, 18, 18)
+                .addGroup(tableUpdateDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tableUpdateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18)
+                    .addComponent(tableUpdateFieldAdd))
+                .addGap(18, 18, 18)
+                .addGroup(tableUpdateDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tableUpdateFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(tableUpdateFieldRemove))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(tableUpdateGuardar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tableDeleteDelete.setText("Eliminar");
@@ -389,6 +528,17 @@ public class Main extends javax.swing.JFrame {
         });
         relationPopupMenu.add(relationDeleteMenuItem);
 
+        javax.swing.GroupLayout viewDiagramDialogLayout = new javax.swing.GroupLayout(viewDiagramDialog.getContentPane());
+        viewDiagramDialog.getContentPane().setLayout(viewDiagramDialogLayout);
+        viewDiagramDialogLayout.setHorizontalGroup(
+            viewDiagramDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        viewDiagramDialogLayout.setVerticalGroup(
+            viewDiagramDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tableManager.setText("Tablas");
@@ -519,6 +669,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -527,6 +684,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> relationAddA;
     private javax.swing.JComboBox<String> relationAddB;
     private javax.swing.JDialog relationAddDialog;
@@ -563,7 +721,19 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton tableManager;
     private javax.swing.JPopupMenu tablePopupMenu;
     private javax.swing.JDialog tableUpdateDialog;
+    private javax.swing.JTextField tableUpdateField;
+    private javax.swing.JButton tableUpdateFieldAdd;
+    private javax.swing.JButton tableUpdateFieldRemove;
+    private javax.swing.JComboBox<String> tableUpdateFields;
+    private javax.swing.JButton tableUpdateGuardar;
+    private javax.swing.JSpinner tableUpdateLength;
     private javax.swing.JMenuItem tableUpdateMenuItem;
+    private javax.swing.JTextField tableUpdateName;
+    private javax.swing.JComboBox<String> tableUpdateOrg;
+    private javax.swing.JTable tableUpdateRegistryTable;
+    private javax.swing.JComboBox<String> tableUpdateSelectedTable;
+    private javax.swing.JComboBox<String> tableUpdateType;
     private javax.swing.JComboBox<String> talbeDeleteNode;
+    private javax.swing.JDialog viewDiagramDialog;
     // End of variables declaration//GEN-END:variables
 }

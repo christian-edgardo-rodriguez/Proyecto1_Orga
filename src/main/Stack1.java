@@ -1,24 +1,26 @@
 package main;
 
+import java.io.Serializable;
+
 /**
  *
  * @author vinicio
  */
-public class Stack {
+public class Stack1 implements Serializable {
 
-    private Node top = null;
+    private Node1 top = null;
     private int size = 0;
 
-    public Stack() {
+    public Stack1() {
         top = null;
         size = 0;
     }
 
     public void push(Object data) {
         if (empty()) {
-            top = new Node(data);
+            top = new Node1(data);
         } else {
-            Node tmp = new Node(data);
+            Node1 tmp = new Node1(data);
             tmp.setNext(top);
             top = tmp;
         }
