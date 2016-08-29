@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -70,7 +71,7 @@ public class DocumentVariable extends Document {
         try {
             catalog = new RandomAccessFile(file, "rw");
         } catch (FileNotFoundException ex) {
-            System.err.println("ERROR, CANT OPEN");
+            JOptionPane.showMessageDialog(null, "ERROR, CANT OPEN");
             ex.printStackTrace();
         }
         String insert = "";
@@ -126,12 +127,18 @@ public class DocumentVariable extends Document {
                 try {
                     insert = insert.replaceAll("[", "");
                 } catch (Exception e) {
+<<<<<<< HEAD
 
+=======
+                    JOptionPane.showMessageDialog(null,"ERROR, CANT WRITE");
+                    e.printStackTrace();
+>>>>>>> origin/master
                 }
                 registryList.add(insert);
                 catalog.close();
             } catch (IOException ex) {
-                System.err.println("Hubo un error en el archivo");
+                JOptionPane.showMessageDialog(null,"ERROR, DOCUMENT WONT LOAD");
+                ex.printStackTrace();
             }
         } else if (availList.isEmpty()) {
             try {
@@ -143,11 +150,14 @@ public class DocumentVariable extends Document {
                 try {
                     insert = insert.replaceAll("[", "");
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null,"ERROR, WONT ADD");
+                    e.printStackTrace();
                 }
                 registryList.add(insert);
                 catalog.close();
             } catch (IOException ex) {
-                System.err.println("Hubo un error en el archivo");
+                JOptionPane.showMessageDialog(null,"ERROR, DOCUMENT WONT LOAD");
+                ex.printStackTrace();
             }
         } else {
             try {
@@ -160,6 +170,8 @@ public class DocumentVariable extends Document {
                             availList.remove(i);
                         }
                     } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null,"ERROR, CANT WRITE");
+                        e.printStackTrace();
                     }
                 }
                 int value = 0;
@@ -172,7 +184,8 @@ public class DocumentVariable extends Document {
                 catalog.writeBytes(insert);
                 catalog.close();
             } catch (IOException ex) {
-                System.err.println("Hubo un error en el archivo");
+                JOptionPane.showMessageDialog(null,"ERROR, CANT WRITE");
+                ex.printStackTrace();
             }
         }
     }
@@ -214,7 +227,7 @@ public class DocumentVariable extends Document {
                                 }
                             }
                             temp += "\n";
-                        } else if (FieldType == 'i') {
+                        } else if (FieldType == 1) {
                             boolean erased = false;
                             for (int j = offset; j < marked; j++) {
                                 char check = (char) catalog.read();
@@ -235,7 +248,7 @@ public class DocumentVariable extends Document {
                                 }
                             }
                             temp += "\n";
-                        } else if (FieldType == 'k') {
+                        } else if (FieldType == 2) {
                             boolean test = true;
                             boolean deleted = false;
                             for (int j = offset; j < marked; j++) {
@@ -257,8 +270,8 @@ public class DocumentVariable extends Document {
                             }
                             temp += "\n";
                         }
-                    } else if (RegType == 'i') {
-                        if (FieldType == 'd') {
+                    } else if (RegType == 1) {
+                        if (FieldType == 0) {
                             char check;
                             int counter = 0;
                             for (int j = offset; j < marked; j++) {
@@ -273,7 +286,7 @@ public class DocumentVariable extends Document {
                                 }
                             }
                             temp += "\n";
-                        } else if (FieldType == 'i') {
+                        } else if (FieldType == 1) {
                             boolean deleted = false;
                             for (int j = offset; j < marked; j++) {
                                 char check = (char) catalog.read();
@@ -294,7 +307,7 @@ public class DocumentVariable extends Document {
                                 }
                             }
                             temp += "\n";
-                        } else if (FieldType == 'k') {
+                        } else if (FieldType == 2) {
                             boolean test = true;
                             for (int j = offset; j < marked; j++) {
                                 char check = (char) catalog.read();
@@ -310,20 +323,20 @@ public class DocumentVariable extends Document {
                         }
                     }
                     if (!temp.contains("/")) {
-                        System.out.print(index.get(i).id + ". " + temp);
+                        JOptionPane.showMessageDialog(null,index.get(i).id + ". " + temp);
                     }
                 }
             }
             catalog.close();
         } catch (IOException ex) {
             ex.printStackTrace();
-            System.err.println("Hubo un error en el archivo");
+            JOptionPane.showMessageDialog(null,"Hubo un error en el archivo");
         }
     }
 
     void delete(int number) {
         if (number > index.size()) {
-            System.out.println("Numero ingresado no es valido");
+            JOptionPane.showMessageDialog(null,"Numero ingresado no es valido");
         } else {
             for (int i = 0; i < index.size(); i++) {
                 if (index.get(i).getId() == number) {
@@ -342,16 +355,18 @@ public class DocumentVariable extends Document {
                                 catalog.writeBytes("*");
                             }
                         } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null,"ERROR,CANT ERASE");
+                            e.printStackTrace();
                         }
                         try {
-                            System.out.println("PAS");
                             registryList.remove(number - 1);
                         } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null,"ERROR,CANT ERASE");
                         }
                         catalog.close();
                     } catch (IOException ex) {
                         ex.printStackTrace();
-                        System.err.println("Hubo un error en el archivo");
+                        JOptionPane.showMessageDialog(null,"ERROR, DOCUMENT WONT LOAD");
                     }
                     availList.push(i);
                 }
@@ -368,7 +383,8 @@ public class DocumentVariable extends Document {
         try {
             catalog = new RandomAccessFile(file, "rw");
         } catch (FileNotFoundException ex) {
-            System.err.println("No se pudo abrir el archivo");
+            JOptionPane.showMessageDialog(null,"ERROR, CANT LOAD");
+            ex.printStackTrace();
         }
         String insert = "";
         for (int i = 0; i < tempReg.getVariableFieldList().size(); i++) {
@@ -377,23 +393,24 @@ public class DocumentVariable extends Document {
         if (registryList.isEmpty()) {
             try {
                 int offset = (int) catalog.getFilePointer();
-                Index indice_temp = new Index(index.size() + 1, offset);//arreglar despues,revisar si funciona bien
+                Index indice_temp = new Index(index.size() + 1, offset);
                 index.add(indice_temp);
                 registryList.add(insert);
                 catalog.close();
             } catch (IOException ex) {
-                System.err.println("Hubo un error en el archivo");
+                JOptionPane.showMessageDialog(null,"ERROR, CANT LOAD");
+                ex.printStackTrace();
             }
         } else if (availList.isEmpty()) {
             try {
                 catalog.seek(catalog.length());
                 int offset = (int) catalog.getFilePointer();
-                Index indice_temp = new Index(index.size() + 1, offset);// arreglar despues, revisar si funciona bien
+                Index indice_temp = new Index(index.size() + 1, offset);
                 index.add(indice_temp);
                 registryList.add(insert);
                 catalog.close();
             } catch (IOException ex) {
-                System.err.println("Hubo un error en el archivo");
+                JOptionPane.showMessageDialog(null,"ERROR, CANT LOAD");
             }
         } else {
             try {
@@ -406,18 +423,19 @@ public class DocumentVariable extends Document {
                             availList.remove(i);
                         }
                     } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null,"ERROR");
                     }
                 }
                 catalog.close();
             } catch (IOException ex) {
-                System.err.println("Hubo un error en el archivo");
+                JOptionPane.showMessageDialog(null,"ERROR, DOCUMENT WONT LOAD");
             }
         }
     }
 
     void find(int busqueda) {
         if (busqueda > index.size()) {
-            System.out.println("Numero ingresado no es valido");
+            JOptionPane.showMessageDialog(null,"ERROR, NUMBER ISNT VALID");
         } else {
             for (int i = 0; i < index.size(); i++) {
                 if (index.get(i).getId() == busqueda) {
@@ -433,11 +451,12 @@ public class DocumentVariable extends Document {
                                 temp += value + "";
                             }
                         } else {
-                            System.out.println("El registro que esta buscando no existe");
+                            JOptionPane.showMessageDialog(null,"ERROR, DOESNT EXIST");
                         }
                         catalog.close();
                     } catch (IOException ex) {
-                        System.err.println("Hubo un error en el archivo");
+                        JOptionPane.showMessageDialog(null,"ERROR, DOCUMENT WONT LOAD");
+                        ex.printStackTrace();
                     }
                 }
             }
