@@ -63,9 +63,9 @@ public class DocumentVariable extends Document {
     public void setHeaderDelim(char headerDelim) {
         this.headerDelim = headerDelim;
     }
-    
+
     void add(RegistryVariable tempReg) {
-        int flagReg = header.flag1; 
+        int flagReg = header.flag1;
         int flagFi = header.flag2;
         try {
             catalog = new RandomAccessFile(file, "rw");
@@ -76,9 +76,9 @@ public class DocumentVariable extends Document {
         String insert = "";
         if (flagReg == 0) {
             insert += "#";
-            if (flagFi== 0) {
+            if (flagFi == 0) {
                 insert += delim(tempReg);
-            } else if (flagFi== 1) {
+            } else if (flagFi == 1) {
                 insert += iden(tempReg);
             } else if (flagFi == 2) {
                 insert += key(tempReg, header);
@@ -126,7 +126,7 @@ public class DocumentVariable extends Document {
                 try {
                     insert = insert.replaceAll("[", "");
                 } catch (Exception e) {
-                    
+
                 }
                 registryList.add(insert);
                 catalog.close();
@@ -164,7 +164,7 @@ public class DocumentVariable extends Document {
                 }
                 int value = 0;
                 if (pos == -1) {
-                    value = (int)catalog.length();
+                    value = (int) catalog.length();
                 } else {
                     value = index.get(pos - 1).getOffset();
                 }
@@ -358,7 +358,7 @@ public class DocumentVariable extends Document {
             }
         }
     }
-    
+
     void modify(int number, RegistryVariable newRegistry) {
         delete(number);
         add(newRegistry);
@@ -443,7 +443,7 @@ public class DocumentVariable extends Document {
             }
         }
     }
-    
+
     String delim(RegistryVariable tempReg) {
         String insert = "{";
         ArrayList<FieldVariable> temp = tempReg.getVariableFieldList();
@@ -472,7 +472,7 @@ public class DocumentVariable extends Document {
     }
     HeaderVariable header;
     LinkedList availList = new LinkedList();
-    ArrayList<Index> index= new ArrayList();
+    ArrayList<Index> index = new ArrayList();
     RandomAccessFile catalog = null;
     char headerDelim = ';';
 }

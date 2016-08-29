@@ -5,6 +5,18 @@
  */
 package main;
 
+import edu.uci.ics.jung.algorithms.layout.CircleLayout;
+import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.graph.UndirectedSparseGraph;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
+import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
+import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
+import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author vinicio
@@ -16,7 +28,15 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        Relations.add(new Relation("Tabla 1", "Uno a Muchos", "Tabla 2"));
+        Relations.add(new Relation("Tabla 1", "Muchos a Muchos", "Tabla 3"));
+        Relations.add(new Relation("Tabla 1", "Muchos a Uno", "Tabla 4"));
+        Relations.add(new Relation("Tabla 4", "Uno a uno", "Tabla 3"));
     }
+
+    UndirectedSparseGraph<String, String> RelationGraph = new UndirectedSparseGraph();
+    ArrayList<FieldSet> Fields = new ArrayList();
+    ArrayList<Relation> Relations = new ArrayList();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,6 +142,11 @@ public class Main extends javax.swing.JFrame {
         tableAddFieldRemove.setText("Eliminar");
 
         tableAddSave.setText("Guardar");
+        tableAddSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tableAddSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout tableAddDialogLayout = new javax.swing.GroupLayout(tableAddDialog.getContentPane());
         tableAddDialog.getContentPane().setLayout(tableAddDialogLayout);
@@ -556,6 +581,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         diagramViewer.setText("Ver Diagrama");
+        diagramViewer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                diagramViewerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -595,15 +625,23 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_tableAddMenuItemActionPerformed
 
     private void tableUpdateMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tableUpdateMenuItemActionPerformed
-        this.tableUpdateDialog.pack();
-        this.tableUpdateDialog.setModal(true);
-        this.tableUpdateDialog.setVisible(true);
+        if (!Fields.isEmpty()) {
+            this.tableUpdateDialog.pack();
+            this.tableUpdateDialog.setModal(true);
+            this.tableUpdateDialog.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Error no hay Tablas Para Modificar", "Error de Capa 8", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_tableUpdateMenuItemActionPerformed
 
     private void tableDeleteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tableDeleteMenuItemActionPerformed
-        this.tableDeleteDialog.pack();
-        this.tableDeleteDialog.setModal(true);
-        this.tableDeleteDialog.setVisible(true);
+        if (!Fields.isEmpty()) {
+            this.tableDeleteDialog.pack();
+            this.tableDeleteDialog.setModal(true);
+            this.tableDeleteDialog.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Error no hay Tablas Para Eliminar", "Error de Capa 8", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_tableDeleteMenuItemActionPerformed
 
     private void relationManagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_relationManagerMouseClicked
@@ -611,9 +649,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_relationManagerMouseClicked
 
     private void relationAddMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relationAddMenuItemActionPerformed
-        this.relationAddDialog.pack();
-        this.relationAddDialog.setModal(true);
-        this.relationAddDialog.setVisible(true);
+        if (Fields.size() > 2) {
+            this.relationAddDialog.pack();
+            this.relationAddDialog.setModal(true);
+            this.relationAddDialog.setVisible(true);
+        }
     }//GEN-LAST:event_relationAddMenuItemActionPerformed
 
     private void relationUpdateMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relationUpdateMenuItemActionPerformed
@@ -627,6 +667,37 @@ public class Main extends javax.swing.JFrame {
         this.relationDeleteDialog.setModal(true);
         this.relationDeleteDialog.setVisible(true);
     }//GEN-LAST:event_relationDeleteMenuItemActionPerformed
+
+    private void tableAddSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tableAddSaveActionPerformed
+
+    }//GEN-LAST:event_tableAddSaveActionPerformed
+
+    private void diagramViewerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diagramViewerActionPerformed
+        RelationGraph = new UndirectedSparseGraph();
+        for (int i = 0; i < Relations.size(); i++) {
+            RelationGraph.addEdge(Relations.get(i).getType().toString(), Relations.get(i).getA(), Relations.get(i).getB());
+        }
+        paintGraph(RelationGraph);
+    }//GEN-LAST:event_diagramViewerActionPerformed
+
+    public void paintGraph(UndirectedSparseGraph<String, String> Graph) {
+        // Layout<V, E>, VisualizationComponent<V,E>
+        Layout<Integer, String> layout = new CircleLayout(Graph);
+        layout.setSize(new Dimension(300, 300));
+        VisualizationViewer<Integer, String> vv = new VisualizationViewer<Integer, String>(layout);
+        vv.setPreferredSize(new Dimension(350, 350));
+        // Show vertex and edge labels
+        vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
+        vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
+        // Create a graph mouse and add it to the visualization component
+        DefaultModalGraphMouse gm = new DefaultModalGraphMouse();
+        gm.setMode(ModalGraphMouse.Mode.TRANSFORMING);
+        vv.setGraphMouse(gm);
+        JFrame frame = new JFrame("Interactive Graph View 1");
+        frame.getContentPane().add(vv);
+        frame.pack();
+        frame.setVisible(true);
+    }
 
     /**
      * @param args the command line arguments
