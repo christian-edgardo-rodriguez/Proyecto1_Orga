@@ -20,7 +20,7 @@ public class DocumentSet {
     public DocumentSet() {
     }
 
-    public DocumentSet(String name, Header header) {
+    public DocumentSet(String name, HeaderSet header) {
         this.name = name;
         this.header = header;
         file = new File("./" + name + ".txt");
@@ -42,11 +42,11 @@ public class DocumentSet {
         this.file = file;
     }
 
-    public Header getHeader() {
+    public HeaderSet getHeader() {
         return header;
     }
 
-    public void setHeader(Header header) {
+    public void setHeader(HeaderSet header) {
         this.header = header;
     }
 
@@ -80,17 +80,17 @@ public class DocumentSet {
             System.err.println("ERROR, CANT OPEN");
             ex.printStackTrace();
         }
-        String record = "";
+        String insert = "";
         for (int i = 0; i < tempReg.getSetFieldList().size(); i++) {
-            record += tempReg.getSetFieldList().get(i).toString();
+            insert += tempReg.getSetFieldList().get(i).toString();
             int temp = tempReg.getSetFieldList().get(i).toString().length();
             while (temp < header.getRegistry().getSetFieldList().get(i).getLength()) {
-                record += " ";
+                insert += " ";
                 temp++;
             }
         }
-        while (record.length() < header.getRegistry().length) {
-            record += " ";
+        while (insert.length() < header.getRegistry().length) {
+            insert += " ";
         }
         if (registryList.isEmpty()) {
             String meta = "";
@@ -120,8 +120,8 @@ public class DocumentSet {
                 Index indexTemp = new Index(index.size() + 1, offset);
                 index.add(indexTemp);
                 catalog.seek(offset);
-                catalog.writeBytes(record);
-                registryList.add(record);
+                catalog.writeBytes(insert);
+                registryList.add(insert);
                 catalog.close();
             } catch (IOException ex) {
                 System.err.println("ERROR");
@@ -134,8 +134,8 @@ public class DocumentSet {
                     int offset = (int) catalog.getFilePointer();
                     Index indexTemp = new Index(index.size() + 1, offset);
                     index.add(indexTemp);
-                    catalog.writeBytes(record);
-                    registryList.add(record);
+                    catalog.writeBytes(insert);
+                    registryList.add(insert);
                     catalog.close();
                 } catch (IOException ex) {
                     System.err.println("ERROR");
@@ -147,7 +147,7 @@ public class DocumentSet {
                     int position = (int)tempList.getData();
                     int offset = index.get(position).getOffset();
                     catalog.seek(offset);
-                    catalog.writeBytes(record);
+                    catalog.writeBytes(insert);
                     catalog.close();
                 } catch (IOException ex) {
                     System.err.println("ERROR");
@@ -235,7 +235,7 @@ public class DocumentSet {
     }
     String name;
     File file = null;
-    Header header;
+    HeaderSet header;
     Stack availList = new Stack();
     ArrayList<Index> index = new ArrayList();
     ArrayList<String> registryList = new ArrayList();

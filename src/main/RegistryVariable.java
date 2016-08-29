@@ -11,23 +11,41 @@ import java.util.ArrayList;
  *
  * @author Christian
  */
-public class RegistryVariable extends Registry {
+public class RegistryVariable {
 
-    public RegistryVariable(int position, int id, ArrayList<Field> fieldList) {
-        super(id, fieldList);
-        this.position = position;
+    public RegistryVariable(int id, ArrayList<FieldVariable> variableFieldList) {
+        this.id = id;
+        this.variableFieldList = variableFieldList;
+    }
+    
+    public RegistryVariable(ArrayList<FieldVariable> variableFieldList, int length) {
+        this.variableFieldList = variableFieldList;
+        this.length = length;
     }
 
-    public RegistryVariable(int id, ArrayList<Field> fieldList) {
-        super(id, fieldList);
+    public int getId() {
+        return id;
     }
 
-    public int getPosition() {
-        return position;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public int getLength() {
+        return length;
     }
-    int position;
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public ArrayList<FieldVariable> getVariableFieldList() {
+        return variableFieldList;
+    }
+
+    public void setVariableFieldList(ArrayList<FieldVariable> variableFieldList) {
+        this.variableFieldList = variableFieldList;
+    }
+    int id, length;
+    ArrayList<FieldVariable> variableFieldList = new ArrayList();
 }

@@ -9,12 +9,12 @@ package main;
  *
  * @author Christian
  */
-public class Header {
+public class HeaderSet {
 
-    public Header() {
+    public HeaderSet() {
     }
 
-    public Header(RegistrySet registry) {
+    public HeaderSet(RegistrySet registry) {
         this.amount = 0;
         this.registry = registry;
     }

@@ -15,8 +15,7 @@ public class FieldVariable extends Field{
         super(name, type, key, foreign);
     }
 
-    public FieldVariable(String content, String name, char type, boolean key, boolean foreign) {
-        super(name, type, key, foreign);
+    public FieldVariable(String content) {
         this.content = content;
     }
 
