@@ -14,8 +14,8 @@ public class Header {
     public Header() {
     }
 
-    public Header(int amount, RegistrySet registry) {
-        this.amount = amount;
+    public Header(RegistrySet registry) {
+        this.amount = 0;
         this.registry = registry;
     }
 

@@ -13,6 +13,9 @@ public class Node {
         this.Data = Data;
     }
 
+    public Node() {
+    }
+
     public Object getData() {
         return Data;
     }

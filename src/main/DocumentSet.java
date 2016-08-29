@@ -23,6 +23,7 @@ public class DocumentSet {
     public DocumentSet(String name, Header header) {
         this.name = name;
         this.header = header;
+        file = new File("./" + name + ".txt");
     }
 
     public String getName() {
@@ -239,5 +240,5 @@ public class DocumentSet {
     ArrayList<Index> index = new ArrayList();
     ArrayList<String> registryList = new ArrayList();
     RandomAccessFile catalog = null;
-    char HEADER = ';';
+    char headerDelim = ';';
 }

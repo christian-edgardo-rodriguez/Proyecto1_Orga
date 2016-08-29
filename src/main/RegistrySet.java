@@ -16,9 +16,14 @@ public class RegistrySet {
     public RegistrySet() {
     }
 
-    public RegistrySet(int id, int length) {
-        this.id = id;
+    public RegistrySet(ArrayList<FieldSet> setFieldList, int length) {
+        this.setFieldList = setFieldList;
         this.length = length;
+    }
+    
+    public RegistrySet(int id, ArrayList<FieldSet> setFieldList) {
+        this.id = id;
+        this.setFieldList = setFieldList;
     }
 
     public int getId() {

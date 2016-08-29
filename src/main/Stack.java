@@ -25,8 +25,11 @@ public class Stack {
         size++;
     }
 
-    public Object pop() {
-        Object tmp = top.getData();
+    public Node pop() {
+        if (top == null) {
+            return new Node();
+        }
+        Node tmp = top;
         top = top.getNext();
         size--;
         return tmp;

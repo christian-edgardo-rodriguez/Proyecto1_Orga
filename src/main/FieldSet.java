@@ -14,9 +14,8 @@ public class FieldSet extends Field{
     public FieldSet() {
     }
 
-    public FieldSet(String name, String content, boolean key, boolean foreign, char type, int length) {
+    public FieldSet(String name, boolean key, char type, int length, boolean foreign) {
         super(name,type,key,foreign);
-        this.content = content;
         this.length = length;
     }
 
@@ -39,6 +38,10 @@ public class FieldSet extends Field{
     @Override
     public String toString() {
         return content;
+    }
+
+    public FieldSet(String content) {
+        this.content = content;
     }
     String content;
     int length;
