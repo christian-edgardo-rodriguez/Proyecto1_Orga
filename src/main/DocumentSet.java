@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -77,7 +78,7 @@ public class DocumentSet {
         try {
             catalog = new RandomAccessFile(file, "rw");
         } catch (FileNotFoundException ex) {
-            System.err.println("ERROR, CANT OPEN");
+            JOptionPane.showMessageDialog(null,"ERROR, CANT OPEN");
             ex.printStackTrace();
         }
         String insert = "";
@@ -124,7 +125,7 @@ public class DocumentSet {
                 registryList.add(insert);
                 catalog.close();
             } catch (IOException ex) {
-                System.err.println("ERROR");
+                JOptionPane.showMessageDialog(null,"ERROR, WONT ADD");
                 ex.printStackTrace();
             }
         } else {
@@ -138,7 +139,7 @@ public class DocumentSet {
                     registryList.add(insert);
                     catalog.close();
                 } catch (IOException ex) {
-                    System.err.println("ERROR");
+                    JOptionPane.showMessageDialog(null,"ERROR, WONT ADD");
                     ex.printStackTrace();
                 }
             } else {
@@ -150,7 +151,7 @@ public class DocumentSet {
                     catalog.writeBytes(insert);
                     catalog.close();
                 } catch (IOException ex) {
-                    System.err.println("ERROR");
+                    JOptionPane.showMessageDialog(null,"ERROR, WONT LOAD");
                     ex.printStackTrace();
                 }
             }
@@ -169,18 +170,18 @@ public class DocumentSet {
                         char value = (char) catalog.read();
                         temp += value + "";
                     }
-                    System.out.println(index.get(i).id + ". " + temp);
+                    JOptionPane.showMessageDialog(null,index.get(i).id + ". " + temp);
                 }
             }
             catalog.close();
         } catch (IOException ex) {
-            System.err.println("LISTING ERROR");
+            JOptionPane.showMessageDialog(null,"ERROR, WONT SHOH");
             ex.printStackTrace();
         }
     }
     void delete(int number) {
         if (number > index.size()) {
-            System.out.println("ERROR");
+            JOptionPane.showMessageDialog(null,"ERROR, NUMBER ISNT VALID");
         } else {
             for (int i = 0; i < index.size(); i++) {
                 if (index.get(i).getId() == number) {
@@ -191,7 +192,7 @@ public class DocumentSet {
                         catalog.writeBytes("*");
                         catalog.close();
                     } catch (IOException ex) {
-                        System.err.println("ERROR");
+                        JOptionPane.showMessageDialog(null,"ERROR, WONT ERASE");
                         ex.printStackTrace();
                     }
                     availList.push(i);
@@ -205,7 +206,7 @@ public class DocumentSet {
     }
     void find(int finder) {
         if (finder > index.size()) {
-            System.out.println("ERROR");
+            JOptionPane.showMessageDialog(null,"ERROR, NUMBER ISNT VALID");
         } else {
             for (int i = 0; i < index.size(); i++) {
                 if (index.get(i).getId() == finder) {
@@ -220,13 +221,13 @@ public class DocumentSet {
                                 char value = (char) catalog.read();
                                 temp += value + "";
                             }
-                            System.out.println(index.get(i).id + ". " + temp);
+                            JOptionPane.showMessageDialog(null,index.get(i).id + ". " + temp);
                         } else {
-                            System.out.println("ERROR, DOESNT EXIST");
+                            JOptionPane.showMessageDialog(null,"ERROR, DOESNT EXIST");
                         }
                         catalog.close();
                     } catch (IOException ex) {
-                        System.err.println("ERROR");
+                        JOptionPane.showMessageDialog(null,"ERROR, WONT FIND");
                         ex.printStackTrace();
                     }
                 }
